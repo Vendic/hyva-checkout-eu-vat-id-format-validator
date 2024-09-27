@@ -13,15 +13,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Vendic\\HyvaCheckoutRequiredFields\\": ""
+            "Vendic\\HyvaCheckoutEuVatIdFormatValidator\\": ""
         }
-    },
-    "extra": {
-        "map": [
-            [
-                "*",
-                "Vendic/HyvaCheckoutRequiredFields"
-            ]
-        ]
     }
 }
