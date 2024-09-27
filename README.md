@@ -1,5 +1,12 @@
 # Hyvä Checkout EU VAT ID Format Validator
-This Magento 2 extension validates the syntax of the VAT ID in the Hyvä checkout for EU countries. It supports country-specific VAT ID formats and ensures that valid syntax is entered during checkout. Non-EU countries are always accepted without validation.
+
+**Note:** This module **only validates the syntax** of the VAT ID. It **does not perform a VIES check** to verify the validity of the VAT number.
+
+For VIES validation, we recommend using the [Geissweb EU VAT Enhanced for Magento 2](https://geissweb.com/eu-vat-enhanced-for-magento-2.html) extension, along with the [Hyvä Checkout Geissweb EU VAT Compatibility Module](https://github.com/Vendic/hyva-checkout-geissweb-euvat). Both extensions are required for full Hyvä Checkout compatibility.
+
+This extension is designed to function alongside those extensions to ensure that a client cannot checkout with an **incorrectly formatted** VAT ID. This feature can be particularly useful for B2B projects.
+
+---
 
 ## Features
 - VAT ID syntax validation for EU member states
@@ -28,12 +35,8 @@ No configuration is needed. The extension will automatically validate the VAT ID
 
 ## Contributing
 
-We welcome contributions to improve this extension. Feel free to open issues or submit pull requests via the [GitHub repository](https://github.com/Vendic/hyva-checkout-eu-vat-id-format-validator).
+We welcome contributions to improve this extension. Feel free to open issues or submit pull requests via the [GitHub issues](https://github.com/Vendic/hyva-checkout-eu-vat-id-format-validator/issues).
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
-
-### Support
-
-If you have any issues or questions, please reach out via the GitHub repository's issue tracker.
