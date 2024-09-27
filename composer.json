@@ -1,0 +1,27 @@
+{
+    "name": "vendic/hyva-chekcout-eu-vat-id-format-validator",
+    "description": "This Magento 2 extension validates the syntax of the VAT ID in the Hyvä checkout for EU countries",
+    "require": {
+        "hyva-themes/magento2-hyva-checkout": "^1.1.23"
+    },
+    "type": "magento2-module",
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Vendic\\HyvaCheckoutRequiredFields\\": ""
+        }
+    },
+    "extra": {
+        "map": [
+            [
+                "*",
+                "Vendic/HyvaCheckoutRequiredFields"
+            ]
+        ]
+    }
+}

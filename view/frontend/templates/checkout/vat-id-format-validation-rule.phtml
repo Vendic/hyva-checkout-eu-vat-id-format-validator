@@ -1,0 +1,70 @@
+<?php declare(strict_types=1);
+
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Framework\View\Element\Template $block */
+
+?>
+<script>
+    (() => {
+        if (hyva && hyva.formValidation) {
+            const vatIDPatternsInfo = {
+                'AT': {regex: /^ATU\d{8}$/, format: 'ATU99999999'},                // Austria
+                'BE': {regex: /^BE0\d{9}$/, format: 'BE0999999999'},               // Belgium
+                'BG': {regex: /^BG\d{9,10}$/, format: 'BG999999999 <?= $escaper->escapeJs(__('or')) ?> BG9999999999'}, // Bulgaria
+                'CY': {regex: /^CY\d{8}[A-Z]$/, format: 'CY99999999X'},            // Cyprus
+                'CZ': {regex: /^CZ\d{8,10}$/, format: 'CZ99999999 <?= $escaper->escapeJs(__('or')) ?> CZ9999999999'}, // Czech Republic
+                'DE': {regex: /^DE\d{9}$/, format: 'DE999999999'},                 // Germany
+                'DK': {regex: /^DK\d{8}$/, format: 'DK99999999'},                  // Denmark
+                'EE': {regex: /^EE\d{9}$/, format: 'EE999999999'},                 // Estonia
+                'EL': {regex: /^EL\d{9}$/, format: 'EL999999999'},                 // Greece
+                'ES': {regex: /^ES[A-Z0-9]\d{7}[A-Z0-9]$/, format: 'ESX9999999X'}, // Spain
+                'FI': {regex: /^FI\d{8}$/, format: 'FI99999999'},                  // Finland
+                'FR': {regex: /^FR[A-HJ-NP-Z0-9]{2}\d{9}$/, format: 'FRXX999999999'}, // France
+                'HR': {regex: /^HR\d{11}$/, format: 'HR99999999999'},              // Croatia
+                'HU': {regex: /^HU\d{8}$/, format: 'HU99999999'},                  // Hungary
+                'IE': {regex: /^IE\d{7}[A-W]$|^IE\d[A-Z]\d{5}[A-W]$/, format: 'IE9999999X <?= $escaper->escapeJs(__('or')) ?> IE9X99999X'}, // Ireland
+                'IT': {regex: /^IT\d{11}$/, format: 'IT99999999999'},              // Italy
+                'LT': {regex: /^LT(\d{9}|\d{12})$/, format: 'LT999999999 <?= $escaper->escapeJs(__('or')) ?> LT999999999999'}, // Lithuania
+                'LU': {regex: /^LU\d{8}$/, format: 'LU99999999'},                  // Luxembourg
+                'LV': {regex: /^LV\d{11}$/, format: 'LV99999999999'},              // Latvia
+                'MT': {regex: /^MT\d{8}$/, format: 'MT99999999'},                  // Malta
+                'NL': {regex: /^NL\d{9}B\d{2}$/, format: 'NL999999999B99'},        // Netherlands
+                'PL': {regex: /^PL\d{10}$/, format: 'PL9999999999'},               // Poland
+                'PT': {regex: /^PT\d{9}$/, format: 'PT999999999'},                 // Portugal
+                'RO': {regex: /^RO\d{2,10}$/, format: 'RO999999999 <?= $escaper->escapeJs(__('or')) ?> RO9999999999'}, // Romania
+                'SE': {regex: /^SE\d{12}$/, format: 'SE999999999999'},             // Sweden
+                'SI': {regex: /^SI\d{8}$/, format: 'SI99999999'},                  // Slovenia
+                'SK': {regex: /^SK\d{10}$/, format: 'SK9999999999'}                // Slovakia
+            };
+
+            const isValidVATIDForCountry = (vatID, countryCode) => {
+                <?php // Check if the country is within the EU VAT patterns ?>
+                if (vatIDPatternsInfo[countryCode]) {
+                    return vatIDPatternsInfo[countryCode].regex.test(vatID);
+                }
+                <?php // If country is outside EU, always return true ?>
+                return true;
+            };
+
+            const getCountryVATFormat = (countryCode) => {
+                const countryInfo = vatIDPatternsInfo[countryCode];
+                if (countryInfo) {
+                    return countryInfo.format;
+                }
+                return '';
+            };
+
+            hyva.formValidation.addRule('vat-id', (value, options, field, context) => {
+                const el = field.element;
+                if (options && el.value.length && context.fields.country_id) {
+                    const country = context.fields.country_id.element.value;
+                    if (country && !isValidVATIDForCountry(el.value, country)) {
+                        const format = getCountryVATFormat(country);
+                        return `<?= $escaper->escapeJs(__('Invalid VAT ID. Please use the correct format: ')) ?>` + format;
+                    }
+                }
+                return true;
+            });
+        }
+    })()
+</script>
