@@ -9,7 +9,10 @@
         if (hyva && hyva.formValidation) {
             const vatIDPatternsInfo = {
                 'AT': {regex: /^ATU\d{8}$/, format: 'ATU99999999'},                // Austria
-                'BE': {regex: /^BE0\d{9}$/, format: 'BE0999999999'},               // Belgium
+                'BE': {
+                    regex: /^BE[01]\d{9}$/,
+                    format: 'BE0999999999 <?= $escaper->escapeJs(__('or')) ?> BE1999999999'
+                }, // Belgium
                 'BG': {regex: /^BG\d{9,10}$/, format: 'BG999999999 <?= $escaper->escapeJs(__('or')) ?> BG9999999999'}, // Bulgaria
                 'CY': {regex: /^CY\d{8}[A-Z]$/, format: 'CY99999999X'},            // Cyprus
                 'CZ': {regex: /^CZ\d{8,10}$/, format: 'CZ99999999 <?= $escaper->escapeJs(__('or')) ?> CZ9999999999'}, // Czech Republic
