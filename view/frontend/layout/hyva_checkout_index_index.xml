@@ -3,7 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="before.body.end">
-            <block name="hyva.checkout.postcode.validation.js"
+            <block name="hyva.checkout.eu.vat.id.validation.js"
                    template="Vendic_HyvaCheckoutEuVatIdFormatValidator::checkout/vat-id-format-validation-rule.phtml"/>
         </referenceContainer>
     </body>
