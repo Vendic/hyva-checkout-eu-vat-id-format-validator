@@ -10,4 +10,13 @@
             </argument>
         </arguments>
     </type>
+    <type name="Hyva\Checkout\Model\Form\EntityForm\EavAttributeBillingAddressForm">
+        <arguments>
+            <argument name="entityFormModifiers" xsi:type="array">
+                <item name="add_vat_id_field_validation" xsi:type="object">
+                    Vendic\HyvaCheckoutEuVatIdFormatValidator\Model\Form\AddVatIdFieldValidation
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
